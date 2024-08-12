@@ -105,6 +105,25 @@ Our training is based on [stable-diffusion-v1-5](https://huggingface.co/runwayml
 └── ...
 ```
 
+下载方式：HuggingFace 的镜像网站： https://hf-mirror.com/ & https://hf-mirror.com/runwayml/stable-diffusion-v1-5
+
+```
+pip install -U huggingface_hub
+
+# 设置环境变量, 建议将上面这一行写入 ~/.bashrc。若没有写入，则每次下载时都需要先输入该命令
+export HF_ENDPOINT=https://hf-mirror.com 
+huggingface-cli download --resume-download --local-dir-use-symlinks False runwayml/stable-diffusion-v1-5 --local-dir ./data/autonomous_driven/MagicDrive/pretrained/stable-diffusion-v1-5
+
+下载位置问题:
+您指定的下载路径是 ./data/autonomous_driven/MagicDrive/pretrained/stable-diffusion-v1-5
+但是 Hugging Face CLI 默认会先将文件下载到缓存目录 /root/.cache/huggingface/hub/
+
+# 更改缓存目录:
+export HF_HOME=/data/huggingface_cache
+# 直接下载到 data 盘:
+huggingface-cli download --resume-download --local-dir-use-symlinks False --cache-dir /data/huggingface_cache runwayml/stable-diffusion-v1-5 --local-dir /data/autonomous_driven/MagicDrive/pretrained/stable-diffusion-v1-5
+```
+
 ## Street-view Generation with MagicDrive
 
 Download our pretrained weight for MagicDrive from [onedrive](https://mycuhk-my.sharepoint.com/:u:/g/personal/1155157018_link_cuhk_edu_hk/ERiu-lbAvq5IkODTscFXYPUBpVYVDbwjHchDExBlPfeQ0w?e=8YaDM0) and put it in `${ROOT}/pretrained/`
